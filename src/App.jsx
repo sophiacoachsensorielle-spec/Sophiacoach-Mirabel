@@ -17,13 +17,13 @@ export default function App() {
           <a href="#home">{t.navHome}</a>
           <a href="#program">{t.navProgram}</a>
           <a href="#benefits">{t.navBenefits}</a>
+          <a href="#testimonials">{t.navTestimonials}</a>
+          <a href="#pricing">{t.navPricing}</a>
           <a href="#contact">{t.navContact}</a>
         </nav>
 
         <div className="lang-switcher">
-          <label htmlFor="lang" className="sr-only">
-            Language
-          </label>
+          <label htmlFor="lang" className="sr-only">Language</label>
           <select
             id="lang"
             value={lang}
@@ -51,16 +51,16 @@ export default function App() {
 
             <div className="stats">
               <div>
-                <strong>{t.statOne}</strong>
-                <span>{t.statsLabel}</span>
+                <strong>{t.metric1}</strong>
+                <span>{t.trustText}</span>
               </div>
               <div>
-                <strong>{t.statTwo}</strong>
-                <span>{t.statsLabel}</span>
+                <strong>{t.metric2}</strong>
+                <span>{t.trustText}</span>
               </div>
               <div>
-                <strong>{t.statThree}</strong>
-                <span>{t.statsLabel}</span>
+                <strong>{t.metric3}</strong>
+                <span>{t.trustText}</span>
               </div>
             </div>
           </div>
@@ -74,12 +74,29 @@ export default function App() {
                 <span className="dot"></span>
                 <span className="dot"></span>
               </div>
+
+              <div className="mini-panel top-mini">
+                <span>Focus</span>
+                <strong>82%</strong>
+              </div>
+
               <div className="chart">
-                <span style={{ height: '38%' }}></span>
-                <span style={{ height: '56%' }}></span>
-                <span style={{ height: '72%' }}></span>
-                <span style={{ height: '88%' }}></span>
+                <span style={{ height: '34%' }}></span>
+                <span style={{ height: '46%' }}></span>
+                <span style={{ height: '68%' }}></span>
+                <span style={{ height: '80%' }}></span>
                 <span style={{ height: '100%' }}></span>
+              </div>
+
+              <div className="mini-row">
+                <div className="mini-panel">
+                  <span>Week</span>
+                  <strong>4</strong>
+                </div>
+                <div className="mini-panel accent">
+                  <span>Goal</span>
+                  <strong>+27%</strong>
+                </div>
               </div>
             </div>
           </div>
@@ -88,27 +105,27 @@ export default function App() {
         <section className="program" id="program">
           <div className="section-heading">
             <p className="eyebrow">{t.heroEyebrow}</p>
-            <h2>{t.sectionProgramTitle}</h2>
-            <p>{t.sectionProgramText}</p>
+            <h2>{t.programTitle}</h2>
+            <p>{t.programText}</p>
           </div>
 
           <div className="cards">
             <article className="info-card">
               <div className="icon">01</div>
-              <h3>{t.cardOneTitle}</h3>
-              <p>{t.cardOneText}</p>
+              <h3>{t.step1Title}</h3>
+              <p>{t.step1Text}</p>
             </article>
 
             <article className="info-card">
               <div className="icon">02</div>
-              <h3>{t.cardTwoTitle}</h3>
-              <p>{t.cardTwoText}</p>
+              <h3>{t.step2Title}</h3>
+              <p>{t.step2Text}</p>
             </article>
 
             <article className="info-card">
               <div className="icon">03</div>
-              <h3>{t.cardThreeTitle}</h3>
-              <p>{t.cardThreeText}</p>
+              <h3>{t.step3Title}</h3>
+              <p>{t.step3Text}</p>
             </article>
           </div>
         </section>
@@ -116,33 +133,96 @@ export default function App() {
         <section className="benefits" id="benefits">
           <div className="section-heading">
             <p className="eyebrow">{t.heroEyebrow}</p>
-            <h2>{t.sectionBenefitsTitle}</h2>
+            <h2>{t.benefitsTitle}</h2>
           </div>
 
           <div className="benefit-list">
             <div className="benefit-item">
               <div className="benefit-badge">✦</div>
               <div>
-                <h3>{t.benefitOneTitle}</h3>
-                <p>{t.benefitOneText}</p>
+                <h3>{t.benefit1Title}</h3>
+                <p>{t.benefit1Text}</p>
               </div>
             </div>
 
             <div className="benefit-item">
               <div className="benefit-badge">✦</div>
               <div>
-                <h3>{t.benefitTwoTitle}</h3>
-                <p>{t.benefitTwoText}</p>
+                <h3>{t.benefit2Title}</h3>
+                <p>{t.benefit2Text}</p>
               </div>
             </div>
 
             <div className="benefit-item">
               <div className="benefit-badge">✦</div>
               <div>
-                <h3>{t.benefitThreeTitle}</h3>
-                <p>{t.benefitThreeText}</p>
+                <h3>{t.benefit3Title}</h3>
+                <p>{t.benefit3Text}</p>
               </div>
             </div>
+          </div>
+        </section>
+
+        <section className="testimonials" id="testimonials">
+          <div className="section-heading">
+            <p className="eyebrow">{t.heroEyebrow}</p>
+            <h2>{t.testimonialTitle}</h2>
+          </div>
+
+          <div className="testimonial-grid">
+            <article className="quote-card">
+              <p>“{t.quote1}”</p>
+              <span>— Maya</span>
+            </article>
+            <article className="quote-card">
+              <p>“{t.quote2}”</p>
+              <span>— Lucas</span>
+            </article>
+            <article className="quote-card">
+              <p>“{t.quote3}”</p>
+              <span>— Emma</span>
+            </article>
+          </div>
+        </section>
+
+        <section className="pricing" id="pricing">
+          <div className="section-heading">
+            <p className="eyebrow">{t.heroEyebrow}</p>
+            <h2>{t.pricingTitle}</h2>
+            <p>{t.pricingText}</p>
+          </div>
+
+          <div className="pricing-grid">
+            <article className="price-card">
+              <h3>{t.plan1Title}</h3>
+              <p className="price">{t.plan1Price}</p>
+              <ul>
+                <li>{t.plan1Feature1}</li>
+                <li>{t.plan1Feature2}</li>
+                <li>{t.plan1Feature3}</li>
+              </ul>
+            </article>
+
+            <article className="price-card featured">
+              <div className="featured-tag">Most popular</div>
+              <h3>{t.plan2Title}</h3>
+              <p className="price">{t.plan2Price}</p>
+              <ul>
+                <li>{t.plan2Feature1}</li>
+                <li>{t.plan2Feature2}</li>
+                <li>{t.plan2Feature3}</li>
+              </ul>
+            </article>
+
+            <article className="price-card">
+              <h3>{t.plan3Title}</h3>
+              <p className="price">{t.plan3Price}</p>
+              <ul>
+                <li>{t.plan3Feature1}</li>
+                <li>{t.plan3Feature2}</li>
+                <li>{t.plan3Feature3}</li>
+              </ul>
+            </article>
           </div>
         </section>
 

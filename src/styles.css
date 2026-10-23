@@ -23,7 +23,8 @@ html {
 body {
   margin: 0;
   font-family: Inter, 'Segoe UI', sans-serif;
-  background: radial-gradient(circle at top left, #f9f8ff 0%, #eef4ff 30%, #f3f7ff 100%);
+  background:
+    radial-gradient(circle at top left, #f9f8ff 0%, #eef4ff 30%, #f3f7ff 100%);
   color: var(--text);
 }
 
@@ -81,7 +82,7 @@ select {
 .nav {
   display: flex;
   align-items: center;
-  gap: 26px;
+  gap: 24px;
   color: var(--muted);
   font-weight: 600;
 }
@@ -200,7 +201,7 @@ button.secondary:hover {
 
 .hero-visual {
   position: relative;
-  min-height: 430px;
+  min-height: 450px;
   display: grid;
   place-items: center;
 }
@@ -213,23 +214,23 @@ button.secondary:hover {
 }
 
 .orb-one {
-  width: 220px;
-  height: 220px;
+  width: 240px;
+  height: 240px;
   background: rgba(141, 128, 255, 0.18);
   right: 60px;
-  top: 12px;
+  top: 18px;
 }
 
 .orb-two {
-  width: 280px;
-  height: 280px;
+  width: 300px;
+  height: 300px;
   background: rgba(99, 115, 255, 0.13);
   left: 30px;
   bottom: 28px;
 }
 
 .dashboard-card {
-  width: min(92%, 420px);
+  width: min(92%, 430px);
   background: rgba(255, 255, 255, 0.9);
   border: 1px solid rgba(135, 152, 201, 0.22);
   border-radius: 28px;
@@ -263,8 +264,29 @@ button.secondary:hover {
   background: #68d39d;
 }
 
+.mini-panel {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #f5f7ff;
+  border-radius: 14px;
+  padding: 12px 14px;
+  border: 1px solid rgba(146, 164, 224, 0.24);
+  color: var(--muted);
+  font-size: 0.84rem;
+}
+
+.mini-panel strong {
+  color: var(--text);
+  font-size: 1.1rem;
+}
+
+.top-mini {
+  margin-bottom: 16px;
+}
+
 .chart {
-  height: 180px;
+  height: 190px;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   align-items: end;
@@ -283,8 +305,21 @@ button.secondary:hover {
   box-shadow: inset 0 -8px 12px rgba(255, 255, 255, 0.14);
 }
 
+.mini-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.mini-panel.accent {
+  background: linear-gradient(135deg, rgba(91, 108, 255, 0.12), rgba(143, 124, 255, 0.18));
+}
+
 .program,
-.benefits {
+.benefits,
+.testimonials,
+.pricing {
   padding-top: 32px;
 }
 
@@ -311,12 +346,18 @@ button.secondary:hover {
   gap: 22px;
 }
 
-.info-card {
+.info-card,
+.quote-card,
+.price-card,
+.benefit-item {
   background: rgba(255, 255, 255, 0.7);
   border: 1px solid var(--line);
   border-radius: 22px;
-  padding: 26px 22px;
   box-shadow: 0 18px 35px rgba(67, 81, 126, 0.08);
+}
+
+.info-card {
+  padding: 26px 22px;
 }
 
 .icon {
@@ -352,9 +393,6 @@ button.secondary:hover {
   display: flex;
   gap: 16px;
   align-items: flex-start;
-  background: rgba(255, 255, 255, 0.7);
-  border: 1px solid var(--line);
-  border-radius: 18px;
   padding: 20px;
 }
 
@@ -378,6 +416,75 @@ button.secondary:hover {
   margin: 0;
   color: var(--muted);
   line-height: 1.7;
+}
+
+.testimonial-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px;
+}
+
+.quote-card {
+  padding: 24px 22px;
+}
+
+.quote-card p {
+  margin: 0 0 14px;
+  color: var(--muted);
+  line-height: 1.8;
+  font-size: 1rem;
+}
+
+.quote-card span {
+  font-weight: 700;
+  color: var(--text);
+}
+
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px;
+}
+
+.price-card {
+  padding: 26px 22px;
+  position: relative;
+}
+
+.price-card h3 {
+  margin: 0 0 16px;
+  font-size: 1.3rem;
+}
+
+.price {
+  font-size: 2.1rem;
+  font-weight: 800;
+  margin: 0 0 18px;
+}
+
+.price-card ul {
+  margin: 0;
+  padding-left: 18px;
+  color: var(--muted);
+  line-height: 2;
+}
+
+.price-card.featured {
+  background: linear-gradient(180deg, rgba(91, 108, 255, 0.08), rgba(143, 124, 255, 0.05));
+  border-color: rgba(91, 108, 255, 0.38);
+  transform: translateY(-6px);
+}
+
+.featured-tag {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: var(--primary);
+  color: white;
+  font-size: 0.72rem;
+  font-weight: 700;
+  border-radius: 999px;
+  padding: 6px 10px;
 }
 
 .cta-panel {
@@ -422,11 +529,10 @@ footer {
 }
 
 @media (max-width: 900px) {
-  .hero {
-    grid-template-columns: 1fr;
-  }
-
-  .cards {
+  .hero,
+  .cards,
+  .testimonial-grid,
+  .pricing-grid {
     grid-template-columns: 1fr;
   }
 }
