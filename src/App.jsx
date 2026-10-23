@@ -3,11 +3,17 @@ import { translations } from './translations'
 
 export default function App() {
   const [lang, setLang] = useState('fr')
+  const [authMode, setAuthMode] = useState('signup')
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [form, setForm] = useState({
     name: '',
     email: '',
     language: 'fr',
     goal: '',
+  })
+  const [loginForm, setLoginForm] = useState({
+    email: '',
+    password: '',
   })
 
   const t = translations[lang]
@@ -17,9 +23,21 @@ export default function App() {
     setForm((prev) => ({ ...prev, [name]: value }))
   }
 
+  const handleLoginChange = (event) => {
+    const { name, value } = event.target
+    setLoginForm((prev) => ({ ...prev, [name]: value }))
+  }
+
   const handleSubmit = (event) => {
     event.preventDefault()
     console.log('Signup form submitted:', form)
+    setIsLoggedIn(true)
+  }
+
+  const handleLoginSubmit = (event) => {
+    event.preventDefault()
+    console.log('Login form submitted:', loginForm)
+    setIsLoggedIn(true)
   }
 
   return (
@@ -36,6 +54,7 @@ export default function App() {
           <a href="#benefits">{t.navBenefits}</a>
           <a href="#testimonials">{t.navTestimonials}</a>
           <a href="#pricing">{t.navPricing}</a>
+          <a href="#dashboard">{t.navDashboard}</a>
           <a href="#contact">{t.navContact}</a>
         </nav>
 
@@ -62,8 +81,8 @@ export default function App() {
             <p className="lead">{t.heroText}</p>
 
             <div className="actions">
-              <button className="primary">{t.primaryButton}</button>
-              <button className="secondary">{t.secondaryButton}</button>
+              <button className="primary" onClick={() => setAuthMode('signup')}>{t.primaryButton}</button>
+              <button className="secondary" onClick={() => setAuthMode('login')}>{t.secondaryButton}</button>
             </div>
 
             <div className="stats">
@@ -243,57 +262,148 @@ export default function App() {
           </div>
         </section>
 
+        <section className="dashboard-block" id="dashboard">
+          <div className="section-heading">
+            <p className="eyebrow">{t.heroEyebrow}</p>
+            <h2>{t.dashboardTitle}</h2>
+            <p>{t.dashboardSubtitle}</p>
+          </div>
+
+          <div className="dashboard-wrap">
+            {!isLoggedIn ? (
+              <div className="auth-box">
+                <div className="auth-toggle">
+                  <button
+                    className={authMode === 'signup' ? 'active' : ''}
+                    onClick={() => setAuthMode('signup')}
+                  >
+                    {t.formTitle}
+                  </button>
+                  <button
+                    className={authMode === 'login' ? 'active' : ''}
+                    onClick={() => setAuthMode('login')}
+                  >
+                    {t.loginTitle}
+                  </button>
+                </div>
+
+                {authMode === 'signup' ? (
+                  <form className="signup-form" onSubmit={handleSubmit}>
+                    <div className="form-grid">
+                      <label>
+                        <span>{t.nameLabel}</span>
+                        <input
+                          type="text"
+                          name="name"
+                          value={form.name}
+                          onChange={handleChange}
+                          placeholder={t.nameLabel}
+                        />
+                      </label>
+
+                      <label>
+                        <span>{t.emailLabel}</span>
+                        <input
+                          type="email"
+                          name="email"
+                          value={form.email}
+                          onChange={handleChange}
+                          placeholder={t.emailLabel}
+                        />
+                      </label>
+
+                      <label>
+                        <span>{t.languageLabel}</span>
+                        <select name="language" value={form.language} onChange={handleChange}>
+                          <option value="fr">Français</option>
+                          <option value="en">English</option>
+                        </select>
+                      </label>
+
+                      <label>
+                        <span>{t.goalLabel}</span>
+                        <textarea
+                          name="goal"
+                          value={form.goal}
+                          onChange={handleChange}
+                          placeholder={t.goalLabel}
+                        />
+                      </label>
+                    </div>
+
+                    <button type="submit" className="primary form-submit">
+                      {t.submitButton}
+                    </button>
+                  </form>
+                ) : (
+                  <form className="signup-form login-form" onSubmit={handleLoginSubmit}>
+                    <label>
+                      <span>{t.emailLabel}</span>
+                      <input
+                        type="email"
+                        name="email"
+                        value={loginForm.email}
+                        onChange={handleLoginChange}
+                        placeholder={t.emailLabel}
+                      />
+                    </label>
+
+                    <label>
+                      <span>Password</span>
+                      <input
+                        type="password"
+                        name="password"
+                        value={loginForm.password}
+                        onChange={handleLoginChange}
+                        placeholder="Password"
+                      />
+                    </label>
+
+                    <button type="submit" className="primary form-submit">
+                      {t.loginButton}
+                    </button>
+                  </form>
+                )}
+              </div>
+            ) : (
+              <div className="user-dashboard">
+                <div className="dashboard-header">
+                  <div>
+                    <p className="eyebrow">{t.dashboardWelcome}</p>
+                    <h3>{form.name || 'Mirabel User'}</h3>
+                  </div>
+                  <button className="secondary small-btn" onClick={() => setIsLoggedIn(false)}>
+                    Logout
+                  </button>
+                </div>
+
+                <div className="dashboard-grid">
+                  <div className="dash-card">
+                    <span>{t.dashboardTask}</span>
+                    <strong>Complete the weekly reflection</strong>
+                  </div>
+                  <div className="dash-card">
+                    <span>{t.dashboardProgress}</span>
+                    <strong>82% progress</strong>
+                  </div>
+                  <div className="dash-card">
+                    <span>{t.dashboardSupport}</span>
+                    <strong>Consistency score: 9/10</strong>
+                  </div>
+                  <div className="dash-card">
+                    <span>{t.dashboardAction}</span>
+                    <strong>3 priorities this week</strong>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+        </section>
+
         <section className="cta-panel" id="contact">
-          <h2>{t.formTitle}</h2>
-          <p className="form-subtitle">{t.formSubtitle}</p>
-
-          <form className="signup-form" onSubmit={handleSubmit}>
-            <div className="form-grid">
-              <label>
-                <span>{t.nameLabel}</span>
-                <input
-                  type="text"
-                  name="name"
-                  value={form.name}
-                  onChange={handleChange}
-                  placeholder={t.nameLabel}
-                />
-              </label>
-
-              <label>
-                <span>{t.emailLabel}</span>
-                <input
-                  type="email"
-                  name="email"
-                  value={form.email}
-                  onChange={handleChange}
-                  placeholder={t.emailLabel}
-                />
-              </label>
-
-              <label>
-                <span>{t.languageLabel}</span>
-                <select name="language" value={form.language} onChange={handleChange}>
-                  <option value="fr">Français</option>
-                  <option value="en">English</option>
-                </select>
-              </label>
-
-              <label>
-                <span>{t.goalLabel}</span>
-                <textarea
-                  name="goal"
-                  value={form.goal}
-                  onChange={handleChange}
-                  placeholder={t.goalLabel}
-                />
-              </label>
-            </div>
-
-            <button type="submit" className="primary form-submit">
-              {t.submitButton}
-            </button>
-          </form>
+          <h2>{t.ctaTitle}</h2>
+          <p>{t.ctaText}</p>
+          <button className="primary">{t.ctaButton}</button>
         </section>
       </main>
 
