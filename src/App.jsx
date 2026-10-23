@@ -3,7 +3,24 @@ import { translations } from './translations'
 
 export default function App() {
   const [lang, setLang] = useState('fr')
+  const [form, setForm] = useState({
+    name: '',
+    email: '',
+    language: 'fr',
+    goal: '',
+  })
+
   const t = translations[lang]
+
+  const handleChange = (event) => {
+    const { name, value } = event.target
+    setForm((prev) => ({ ...prev, [name]: value }))
+  }
+
+  const handleSubmit = (event) => {
+    event.preventDefault()
+    console.log('Signup form submitted:', form)
+  }
 
   return (
     <div className="page-shell">
@@ -227,9 +244,56 @@ export default function App() {
         </section>
 
         <section className="cta-panel" id="contact">
-          <h2>{t.ctaTitle}</h2>
-          <p>{t.ctaText}</p>
-          <button className="primary">{t.ctaButton}</button>
+          <h2>{t.formTitle}</h2>
+          <p className="form-subtitle">{t.formSubtitle}</p>
+
+          <form className="signup-form" onSubmit={handleSubmit}>
+            <div className="form-grid">
+              <label>
+                <span>{t.nameLabel}</span>
+                <input
+                  type="text"
+                  name="name"
+                  value={form.name}
+                  onChange={handleChange}
+                  placeholder={t.nameLabel}
+                />
+              </label>
+
+              <label>
+                <span>{t.emailLabel}</span>
+                <input
+                  type="email"
+                  name="email"
+                  value={form.email}
+                  onChange={handleChange}
+                  placeholder={t.emailLabel}
+                />
+              </label>
+
+              <label>
+                <span>{t.languageLabel}</span>
+                <select name="language" value={form.language} onChange={handleChange}>
+                  <option value="fr">Français</option>
+                  <option value="en">English</option>
+                </select>
+              </label>
+
+              <label>
+                <span>{t.goalLabel}</span>
+                <textarea
+                  name="goal"
+                  value={form.goal}
+                  onChange={handleChange}
+                  placeholder={t.goalLabel}
+                />
+              </label>
+            </div>
+
+            <button type="submit" className="primary form-submit">
+              {t.submitButton}
+            </button>
+          </form>
         </section>
       </main>
 
